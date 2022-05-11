@@ -15,7 +15,7 @@ def index():
             age=int(request.form['age'])
 
             sex=request.form['sex']
-            if sex=='Female':
+            if sex=='female':
                 sex=0
             else:
                 sex=1
@@ -25,17 +25,17 @@ def index():
             children=request.form['children']
 
             smoker=request.form['smoker']
-            if smoker=='Yes':
+            if smoker=='yes':
                 smoker=1
             else:
                 smoker=0
 
             region=request.form['region']
-            if region=='North East':
+            if region=='northeast':
                 region=0
-            elif region=='North West':
+            elif region=='northwest':
                 region=1
-            elif region=='South West':
+            elif region=='southwest':
                 region=2
             else:
                 region=3
@@ -44,6 +44,7 @@ def index():
             model=pickle.load(open(filename,'rb'))
             prediction=model.predict([[age,sex,bmi,children,smoker,region]])
             print('prediction is', prediction)
+            return render_template('results.html',prediction=prediction[0])
 
         except Exception as e:
             print('The Exception message is: ', e)
